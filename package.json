@@ -4,7 +4,7 @@
   "type": "module",
   "description": "Claude Code plugin for Nano Banana image generation models",
   "scripts": {
-    "build": "cd mcp-server && npm run build",
+    "build": "cd mcp-server && npm run build && cd .. && npx esbuild mcp-server/dist/index.js --bundle --platform=node --format=cjs --outfile=mcp-server/dist/bundle.cjs",
     "install-deps": "cd mcp-server && npm install",
     "dev": "cd mcp-server && npm run dev",
     "format": "prettier --write .",
@@ -22,6 +22,7 @@
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
+    "esbuild": "^0.28.0",
     "eslint": "^9.24.0",
     "eslint-config-prettier": "^10.1.2",
     "eslint-plugin-import": "^2.31.0",
