@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "nanobanana": {
+      "command": "node",
+      "args": ["./mcp-server/dist/index.js"],
+      "env": {
+        "NANOBANANA_API_KEY": ""
+      }
+    }
+  }
+}
