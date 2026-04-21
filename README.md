@@ -20,6 +20,20 @@ A professional Claude Code plugin for generating and manipulating images using t
 2. **Node.js 20+** and npm
 3. **Gemini API Key** - get one from [Google AI Studio](https://aistudio.google.com/apikey)
 
+## API Key Setup
+
+Your API key is handled securely by the Claude Code plugin system. You **don't** need to set environment variables or create `.env` files.
+
+**During install:** Claude Code automatically prompts you for your Gemini API key when you enable the plugin. The key is stored in your system keychain (macOS Keychain / Windows Credential Manager / Linux secret service) - never in plain text.
+
+**To change your key later:**
+1. Run `/plugin` in Claude Code
+2. Go to the **Installed** tab
+3. Select **nanobanana**
+4. Choose configure to update your API key
+
+The key is passed to the MCP server securely via the plugin's `userConfig` system.
+
 ## Model Selection
 
 The following Nano Banana models are supported:
