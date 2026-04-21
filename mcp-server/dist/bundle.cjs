@@ -46851,6 +46851,11 @@ var ImageGenerator = class _ImageGenerator {
     await Promise.all(previewPromises);
   }
   static validateAuthentication() {
+    const pluginKey = process.env.CLAUDE_PLUGIN_OPTION_api_key;
+    if (pluginKey) {
+      console.error("\u2713 Found API key from plugin configuration");
+      return { apiKey: pluginKey };
+    }
     const nanoKey = process.env.NANOBANANA_API_KEY;
     if (nanoKey) {
       console.error("\u2713 Found NANOBANANA_API_KEY environment variable");

@@ -99,6 +99,13 @@ export class ImageGenerator {
   }
 
   static validateAuthentication(): AuthConfig {
+    // Check plugin userConfig (exported as CLAUDE_PLUGIN_OPTION_api_key)
+    const pluginKey = process.env.CLAUDE_PLUGIN_OPTION_api_key;
+    if (pluginKey) {
+      console.error('✓ Found API key from plugin configuration');
+      return { apiKey: pluginKey };
+    }
+
     const nanoKey = process.env.NANOBANANA_API_KEY;
     if (nanoKey) {
       console.error('✓ Found NANOBANANA_API_KEY environment variable');

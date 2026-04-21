@@ -2,10 +2,7 @@
   "mcpServers": {
     "nanobanana": {
       "command": "node",
-      "args": ["${CLAUDE_PLUGIN_ROOT}/mcp-server/dist/bundle.cjs"],
-      "env": {
-        "NANOBANANA_API_KEY": "${user_config.api_key}"
-      }
+      "args": ["${CLAUDE_PLUGIN_ROOT}/mcp-server/dist/bundle.cjs"]
     }
   }
 }
