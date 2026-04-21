@@ -11,6 +11,8 @@
   "keywords": ["image-generation", "gemini", "ai-art", "icons", "diagrams", "patterns"],
   "userConfig": {
     "api_key": {
+      "title": "Gemini API Key",
+      "type": "string",
       "description": "Gemini API key for image generation. Get one from https://aistudio.google.com/apikey",
       "sensitive": true
     }
