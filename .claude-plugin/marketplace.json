@@ -1,0 +1,16 @@
+{
+  "name": "nanobanana",
+  "owner": {
+    "name": "tayzar-tznw"
+  },
+  "metadata": {
+    "description": "Nano Banana image generation plugin for Claude Code"
+  },
+  "plugins": [
+    {
+      "name": "nanobanana",
+      "source": "./",
+      "description": "Generate and manipulate images using Google Gemini's Nano Banana models"
+    }
+  ]
+}

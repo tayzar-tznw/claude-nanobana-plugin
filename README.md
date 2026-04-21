@@ -16,17 +16,9 @@ A professional Claude Code plugin for generating and manipulating images using t
 
 ## Prerequisites
 
-1. **Claude Code** installed and configured
+1. **Claude Code** installed and configured ([setup guide](https://code.claude.com/docs/en/quickstart))
 2. **Node.js 20+** and npm
-3. **API Key**: Set the `NANOBANANA_API_KEY` environment variable with your Gemini API key.
-   Get one from [Google AI Studio](https://aistudio.google.com/apikey).
-
-### Key Components
-
-- **`index.ts`**: MCP server using `@modelcontextprotocol/sdk` for professional protocol handling
-- **`imageGenerator.ts`**: Handles all Gemini API interactions and response processing
-- **`fileHandler.ts`**: Manages file I/O, smart filename generation, and file searching
-- **`types.ts`**: Shared TypeScript interfaces for type safety
+3. **Gemini API Key** - get one from [Google AI Studio](https://aistudio.google.com/apikey)
 
 ## Model Selection
 
@@ -36,63 +28,48 @@ The following Nano Banana models are supported:
 - `gemini-3-pro-image-preview` (Nano Banana Pro)
 - `gemini-2.5-flash-image` (Nano Banana v1)
 
-The `gemini-3.1-flash-image-preview` model is the default. To use a different model, set the `NANOBANANA_MODEL` environment variable:
+To use a different model, set the `NANOBANANA_MODEL` environment variable:
 
 ```bash
-# Example: Use Nano Banana Pro
 export NANOBANANA_MODEL=gemini-3-pro-image-preview
-
-# Example: Use Nano Banana v1
-export NANOBANANA_MODEL=gemini-2.5-flash-image
 ```
 
 ## Installation
 
-### Quick Install (single command)
+### Plugin Install (recommended)
 
-```bash
-git clone https://github.com/tayzar-tznw/claude-nanobana-plugin ~/.claude-nanobanana && cd ~/.claude-nanobanana && ./install.sh
+Add the marketplace and install the plugin from within Claude Code:
+
+```
+/plugin marketplace add tayzar-tznw/claude-nanobana-plugin
+/plugin install nanobanana@nanobanana
 ```
 
-This will clone the repo, build the MCP server, register it with Claude Code, and install all slash commands globally. You'll be prompted for your Gemini API key during setup.
+You'll be prompted for your Gemini API key during setup. That's it - all commands and the MCP server are ready to use.
 
-### Manual Install
+### Local Development Install
 
-If you prefer to set things up yourself:
-
-**1. Clone and build:**
+If you want to test or develop the plugin locally:
 
 ```bash
 git clone https://github.com/tayzar-tznw/claude-nanobana-plugin
 cd claude-nanobana-plugin
 npm install
-```
-
-**2. Register the MCP server with Claude Code:**
-
-```bash
-claude mcp add nanobanana -s user -e NANOBANANA_API_KEY=your-key -- node $(pwd)/mcp-server/dist/index.js
-```
-
-**3. Install slash commands:**
-
-```bash
-mkdir -p ~/.claude/commands
-cp .claude/commands/*.md ~/.claude/commands/
+claude --plugin-dir .
 ```
 
 ### Available Commands
 
-Once installed, the following slash commands will be available in Claude Code:
+Once installed, the following slash commands will be available in Claude Code (namespaced under `nanobanana:`):
 
-- `/generate` - Single or multiple image generation with style/variation options
-- `/edit` - Image editing
-- `/restore` - Image restoration
-- `/icon` - Generate app icons, favicons, and UI elements in multiple sizes
-- `/pattern` - Generate seamless patterns and textures for backgrounds
-- `/story` - Generate sequential images that tell a visual story or process
-- `/diagram` - Generate technical diagrams, flowcharts, and architectural mockups
-- `/nanobanana` - Natural language interface
+- `/nanobanana:generate` - Single or multiple image generation with style/variation options
+- `/nanobanana:edit` - Image editing
+- `/nanobanana:restore` - Image restoration
+- `/nanobanana:icon` - Generate app icons, favicons, and UI elements in multiple sizes
+- `/nanobanana:pattern` - Generate seamless patterns and textures for backgrounds
+- `/nanobanana:story` - Generate sequential images that tell a visual story or process
+- `/nanobanana:diagram` - Generate technical diagrams, flowcharts, and architectural mockups
+- `/nanobanana:nanobanana` - Natural language interface
 
 ## Usage
 
@@ -461,25 +438,43 @@ The plugin uses the official Model Context Protocol (MCP) SDK for robust client-
 
 ### Common Issues
 
-1. **MCP server not connecting**: Ensure the server is built (`npm run build`) and the path in `.mcp.json` is correct
+1. **Plugin not loading**: Run `/reload-plugins` after install, or check the `/plugin` Errors tab
 
-2. **"No API key found"**: Set `NANOBANANA_API_KEY` environment variable in your `.mcp.json` or shell:
+2. **"No API key found"**: Re-run `/plugin` -> select nanobanana -> configure to set your API key
 
-   ```bash
-   export NANOBANANA_API_KEY="your-api-key-here"
-   ```
-
-3. **"Build failed"**: Ensure Node.js 18+ is installed and run:
-
-   ```bash
-   npm run install-deps && npm run build
-   ```
+3. **MCP server not connecting**: Ensure Node.js 18+ is installed. The SessionStart hook auto-installs dependencies on first use
 
 4. **"Image not found"**: Check that input files are in one of the searched directories (see File Search Locations above)
 
 ### Debug Mode
 
-The MCP server includes detailed debug logging that appears in the Claude Code output to help diagnose issues.
+Run `claude --debug` to see plugin loading details and MCP server initialization logs.
+
+## Plugin Architecture
+
+```
+claude-nanobana-plugin/
+├── .claude-plugin/
+│   ├── plugin.json          # Plugin manifest
+│   └── marketplace.json     # Marketplace catalog
+├── commands/                # Slash commands
+│   ├── generate.md
+│   ├── edit.md
+│   ├── restore.md
+│   ├── icon.md
+│   ├── pattern.md
+│   ├── story.md
+│   ├── diagram.md
+│   └── nanobanana.md
+├── hooks/
+│   └── hooks.json           # Auto-install deps on SessionStart
+├── .mcp.json                # MCP server configuration
+├── mcp-server/              # MCP server source
+│   ├── src/
+│   └── dist/                # Compiled server (included)
+├── CLAUDE.md                # Image generation guidelines
+└── README.md
+```
 
 ## Legal
 
@@ -492,5 +487,5 @@ The MCP server includes detailed debug logging that appears in the Claude Code o
 2. Create a feature branch
 3. Make your changes in the modular architecture
 4. Run `npm run build` to ensure compilation
-5. Test with Claude Code (`./install.sh`)
+5. Test with `claude --plugin-dir .`
 6. Submit a pull request

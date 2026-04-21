@@ -1,0 +1,18 @@
+{
+  "name": "nanobanana",
+  "version": "1.0.12",
+  "description": "Generate and manipulate images using Google Gemini's Nano Banana models - text-to-image, editing, restoration, icons, patterns, stories, and diagrams",
+  "author": {
+    "name": "tayzar-tznw"
+  },
+  "homepage": "https://github.com/tayzar-tznw/claude-nanobana-plugin",
+  "repository": "https://github.com/tayzar-tznw/claude-nanobana-plugin",
+  "license": "Apache-2.0",
+  "keywords": ["image-generation", "gemini", "ai-art", "icons", "diagrams", "patterns"],
+  "userConfig": {
+    "api_key": {
+      "description": "Gemini API key for image generation. Get one from https://aistudio.google.com/apikey",
+      "sensitive": true
+    }
+  }
+}

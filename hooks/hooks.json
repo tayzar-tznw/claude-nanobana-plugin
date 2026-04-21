@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "test -d \"${CLAUDE_PLUGIN_ROOT}/mcp-server/node_modules\" || (cd \"${CLAUDE_PLUGIN_ROOT}/mcp-server\" && npm install --production 2>/dev/null)"
+          }
+        ]
+      }
+    ]
+  }
+}
