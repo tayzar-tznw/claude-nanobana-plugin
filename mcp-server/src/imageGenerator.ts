@@ -141,9 +141,11 @@ export class ImageGenerator {
     }
 
     throw new Error(
-      'ERROR: No valid API key found. Please set NANOBANANA_API_KEY environment variable.\n' +
+      'ERROR: No valid API key found.\n' +
+        'Configure your key via: /plugin → nanobanana → Configure\n' +
+        'Or set NANOBANANA_API_KEY environment variable.\n' +
         'Fallback variables: NANOBANANA_GEMINI_API_KEY, NANOBANANA_GOOGLE_API_KEY, GEMINI_API_KEY, GOOGLE_API_KEY.\n' +
-        'For more details on authentication, visit: https://geminicli.com/docs/get-started/authentication/',
+        'Get a key from: https://aistudio.google.com/apikey',
     );
   }
 

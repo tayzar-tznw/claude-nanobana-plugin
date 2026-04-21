@@ -46881,7 +46881,7 @@ var ImageGenerator = class _ImageGenerator {
       console.error("\u2713 Found GOOGLE_API_KEY environment variable (fallback)");
       return { apiKey: googleKey };
     }
-    throw new Error("ERROR: No valid API key found. Please set NANOBANANA_API_KEY environment variable.\nFallback variables: NANOBANANA_GEMINI_API_KEY, NANOBANANA_GOOGLE_API_KEY, GEMINI_API_KEY, GOOGLE_API_KEY.\nFor more details on authentication, visit: https://geminicli.com/docs/get-started/authentication/");
+    throw new Error("ERROR: No valid API key found.\nConfigure your key via: /plugin \u2192 nanobanana \u2192 Configure\nOr set NANOBANANA_API_KEY environment variable.\nFallback variables: NANOBANANA_GEMINI_API_KEY, NANOBANANA_GOOGLE_API_KEY, GEMINI_API_KEY, GOOGLE_API_KEY.\nGet a key from: https://aistudio.google.com/apikey");
   }
   isValidBase64ImageData(data) {
     if (!data || data.length < 100) {
